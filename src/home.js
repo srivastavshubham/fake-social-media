@@ -7,15 +7,15 @@ import InstaImage from './Instagram_icon.png.webp'
 
 export default function Home() {
   return (
-    <div style={{display:'flex',justifyContent:'center'}}>
+    <div style={{display:'flex',justifyContent:'center',paddingTop:'50px'}}>
          <Link to="/twitter" className='twitter-button'>
             <img src={TwitterImage} alt="Button Image" style={{ width: '20px', height: '20px' }} />
-            <span style={{fontSize:'16px',textAlign:'center'}}>Fake Tweet Generator</span>
+            <span style={{fontSize:'16px',textAlign:'center',paddingLeft:'5px'}}>Fake Tweet Generator</span>
         </Link>
 
         <Link to="/insta" className='insta-button'>
             <img src={InstaImage} alt="Button Image" style={{ width: '20px', height: '20px'}} />
-            <span style={{fontSize:'16px',textAlign:'center',color: '#ee2a7b'}}>Fake Instagram DM</span>
+            <span style={{fontSize:'16px',textAlign:'center',color: '#ee2a7b',paddingLeft:'5px'}}>Fake Instagram DM</span>
         </Link>
     </div>
   )

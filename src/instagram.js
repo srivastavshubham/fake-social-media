@@ -3,15 +3,11 @@ import { Container, Row, Col, Form, FormGroup, Label, Input,Button } from 'react
 import html2canvas from 'html2canvas';
 import { MdVerified } from "react-icons/md";
 import { FaRegComment } from "react-icons/fa6";
-import { FaRetweet } from "react-icons/fa6";
-import { CiHeart } from "react-icons/ci";
-import { FiShare } from "react-icons/fi";
 import { FiSend } from "react-icons/fi";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-
-
 import Avatar from './images.png'
 import Demo from './logo.webp'
 
@@ -25,12 +21,14 @@ const Instagram = () => {
     const [avatar, setAvatar] = useState();
     const [post_image, setPostImage] = useState();
     const [post_date, setPostDate] = useState();
-    const [time_format, setTimeFormat] = useState('PM');
-    const [date, setDate] = useState();
-    const [view, setView] = useState();
-    const [retweet, setRetweet] = useState();
-    const [quotes, setQuotes] = useState();
     const [likes, setLikes] = useState();
+    const [caption, setCaption] = useState();
+    const [comment, setComment] = useState();
+    const [more, setMore] = useState('show');
+    const [story_circle, setStoryCircle] = useState('show');
+    const [toggle_location, setToggleLocation] = useState('show');
+    const [toggle_reaction, setReaction] = useState('not liked');
+    const [toggle_follow, setFollow] = useState('follow');
     const [isVerified, setIsVerified] = useState('No');
     const [theme, setTheme] = useState('light');
 
@@ -42,17 +40,23 @@ const Instagram = () => {
     const handleThemeRadio = (event) => {
       setTheme(event.target.value); 
       };
-
-      const tweetFormat = (tweet) => {
-        const mentionRegex = /@([\w]+)/g;
-        const hashtagRegex = /#([\wşçöğüıİ]+)/gi;
-        const linkRegex = /(https?:\/\/[\w\.\/]+)/;
-        const withMentions = tweet.replace(mentionRegex, '<span>@$1</span>');
-        const withHashtags = withMentions.replace(hashtagRegex, '<span>#$1</span>');
-        const withLinks = withHashtags.replace(linkRegex, '<a href="$1" target="_blank">$1</a>');
-        return <div dangerouslySetInnerHTML={{ __html: withLinks }} />;
-      };
+    const handleShowHideMore=(e)=>{
+        setMore(e.target.value); 
+      }
+    const handleLocationVisible=(e)=>{
+        setToggleLocation(e.target.value); 
+        }
       
+      const handleStoryCircle=(e)=>{
+        setStoryCircle(e.target.value); 
+      }
+      const handleReaction=(e)=>{
+        setReaction(e.target.value); 
+      }
+      const handleFollow=(e)=>{
+        setFollow(e.target.value); 
+      }
+
       const handleAvatar=(e)=>{
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -76,17 +80,6 @@ const Instagram = () => {
       }
       
 
-      const handleDate = (e) => {
-        const selectedDate = e.target.value;
-        const dateObj = new Date(selectedDate);
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        const day = dateObj.getDate();
-        const month = months[dateObj.getMonth()];
-        const year = dateObj.getFullYear();
-        const formattedDate = `${month} ${day}, ${year}`;
-        setDate(formattedDate);
-      };
-
   const getImage = () =>{
     if (!divRef.current) return;
     html2canvas(divRef.current)
@@ -103,7 +96,7 @@ const Instagram = () => {
   }
       
   return (
-    <Container style={{ border: '2px solid #ccc', borderRadius: '10px', padding: '20px' ,marginTop:'50px',color:'#5e5ee7',marginBottom:'5%'}}>
+    <Container style={{ border: '2px solid #ccc', borderRadius: '10px', padding: '20px' ,marginTop:'50px',color:'#ee2a7b',marginBottom:'5%'}}>
       <Row>
         <Col md="8" style={{ borderRight: '1px solid #ccc' }}>
           <h2>Customize Your Tweet</h2>
@@ -160,41 +153,6 @@ const Instagram = () => {
                 onChange={(e) => setPostDate(e.target.value)}
               />
             </FormGroup>
-            </Col>
-
-            <Col md="6">
-            <FormGroup>
-              <Label for="name">Date</Label>
-              <Input
-                type="date"
-                onChange={handleDate}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="name">Views</Label>
-              <Input
-                type="number"
-                value={view}
-                 onChange={(e) => setView(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="username">Retweet</Label>
-              <Input
-                type="number"
-                value={retweet}
-                 onChange={(e) => setRetweet(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="tweet">Quotes</Label>
-              <Input
-                type="number"
-                name="tweet"
-                value={quotes}
-                 onChange={(e) => setQuotes(e.target.value)}
-              />
-            </FormGroup>
             <FormGroup>
               <Label for="tweet">Likes</Label>
               <Input
@@ -204,7 +162,173 @@ const Instagram = () => {
                 onChange={(e) => setLikes(e.target.value)}
               />
             </FormGroup>
-            <div style={{display:'flex'}}>
+            <FormGroup>
+              <Label for="tweet">No. of Comment</Label>
+              <Input
+                type="text"
+                name="tweet"
+                value={comment}
+                 onChange={(e) => setComment(e.target.value)}
+              />
+            </FormGroup>
+            </Col>
+
+            <Col md="6">
+            <FormGroup>
+              <Label for="tweet">Caption</Label>
+              <Input
+                type="text"
+                name="tweet"
+                value={caption}
+                 onChange={(e) => setCaption(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup tag="fieldset">
+            <Label for="tweet">Show or Hide more in caption</Label>
+            <div style={{ display: 'flex' }}>
+                <FormGroup check>
+                <Label check>
+                    <Input 
+                    type="radio" 
+                    name="radio2" 
+                    value="show" 
+                    checked={more === "show"} 
+                    onChange={handleShowHideMore}
+                    />
+                    Show
+                </Label>
+                </FormGroup>&emsp;
+                <FormGroup check>
+                <Label check>
+                <Input 
+                type="radio" 
+                name="radio2" 
+                value="hide" 
+                checked={more === "hide"} 
+                onChange={handleShowHideMore}
+                />
+                Hide
+            </Label>
+            </FormGroup>
+            </div>
+            </FormGroup>
+
+            <FormGroup tag="fieldset">
+            <Label for="tweet">Story Circle</Label>
+            <div style={{ display: 'flex' }}>
+                <FormGroup check>
+                <Label check>
+                    <Input 
+                    type="radio" 
+                    name="radio3" 
+                    value="show" 
+                    checked={story_circle === "show"} 
+                    onChange={handleStoryCircle}
+                    />
+                    Show
+                </Label>
+                </FormGroup>&emsp;
+                <FormGroup check>
+                <Label check>
+                <Input 
+                type="radio" 
+                name="radio3" 
+                value="hide" 
+                checked={story_circle === "hide"} 
+                onChange={handleStoryCircle}
+                />
+                Hide
+            </Label>
+            </FormGroup>
+            </div>
+            </FormGroup>
+            <FormGroup tag="fieldset">
+            <Label for="tweet">Location Visible</Label>
+            <div style={{ display: 'flex' }}>
+                <FormGroup check>
+                <Label check>
+                    <Input 
+                    type="radio" 
+                    name="radio4" 
+                    value="show" 
+                    checked={toggle_location === "show"} 
+                    onChange={handleLocationVisible}
+                    />
+                    Show
+                </Label>
+                </FormGroup>&emsp;
+                <FormGroup check>
+                <Label check>
+                <Input 
+                type="radio" 
+                name="radio4" 
+                value="hide" 
+                checked={toggle_location === "hide"} 
+                onChange={handleLocationVisible}
+                />
+                Hide
+            </Label>
+            </FormGroup>
+            </div>
+            </FormGroup>
+            <FormGroup tag="fieldset">
+            <Label for="tweet">Reaction on Post</Label>
+            <div style={{ display: 'flex' }}>
+                <FormGroup check>
+                <Label check>
+                    <Input 
+                    type="radio" 
+                    name="radio5" 
+                    value="liked" 
+                    checked={toggle_reaction === "liked"} 
+                    onChange={handleReaction}
+                    />
+                    Liked
+                </Label>
+                </FormGroup>&emsp;
+                <FormGroup check>
+                <Label check>
+                <Input 
+                type="radio" 
+                name="radio5" 
+                value="not liked" 
+                checked={toggle_reaction === "not liked"} 
+                onChange={handleReaction}
+                />
+                Not Liked
+            </Label>
+            </FormGroup>
+            </div>
+            </FormGroup>
+            <FormGroup tag="fieldset">
+            <Label for="tweet">Follow or Following</Label>
+            <div style={{ display: 'flex' }}>
+                <FormGroup check>
+                <Label check>
+                    <Input 
+                    type="radio" 
+                    name="radio6" 
+                    value="follow" 
+                    checked={toggle_follow === "follow"} 
+                    onChange={handleFollow}
+                    />
+                    Follow
+                </Label>
+                </FormGroup>&emsp;
+                <FormGroup check>
+                <Label check>
+                <Input 
+                type="radio" 
+                name="radio6" 
+                value="following" 
+                checked={toggle_follow === "following"} 
+                onChange={handleFollow}
+                />
+                Following
+            </Label>
+            </FormGroup>
+            </div>
+            </FormGroup>
             <FormGroup tag="fieldset">
             <Label for="tweet">Verified</Label>
             <div style={{ display: 'flex' }}>
@@ -234,7 +358,7 @@ const Instagram = () => {
             </FormGroup>
             </div>
             </FormGroup>
-            <FormGroup tag="fieldset" style={{paddingLeft:'20px'}}>
+            <FormGroup tag="fieldset">
             <Label for="tweet">Theme</Label>
             <div style={{ display: 'flex' }}>
                 <FormGroup check>
@@ -261,7 +385,6 @@ const Instagram = () => {
             </FormGroup>
             </div>
             </FormGroup>
-            </div>
             </Col>
 
             </Row>
@@ -272,16 +395,19 @@ const Instagram = () => {
           <div className="instagram-container" ref={divRef} style={{backgroundColor:theme=='light'?'white':'black',color:theme=='light'?'black':'white'}}>
           <div className='insta-top-container'>
            <div style={{display:'flex'}}>
-           {(avatar && <img src={avatar} className='avatar-pic' style={{border:'2px solid #ee2a7b'}}/>) || <img src={Avatar} className='avatar-pic' style={{border:'2px solid #ee2a7b'}}/>}
+           {(avatar && <img src={avatar} className='avatar-pic' style={{border:story_circle=='show'?'2px solid #ee2a7b':'none'}}/>) || <img src={Avatar} className='avatar-pic' style={{border:story_circle=='show'?'2px solid #ee2a7b':'none'}}/>}
            <div>
            <div className='twitter-name-icon'>
-              <div className="twitter-name">{name || 'Name'}</div>
+              <div className="twitter-name" style={{paddingTop:toggle_location=='hide'?'10px':''}}>{name || 'Name'}</div>
                 {isVerified == 'Yes' && <MdVerified width="19" height="19" color='blue'/>}
             </div>
-            <div className='insta-username'>{location || 'location'}</div>
+            {toggle_location=='show'? <div className='insta-username'>{location || 'location'}</div>:''}
            </div>
            </div>
+           <div>
+            <button className='follow-button'>{toggle_follow == 'follow'? "Follow":"Following"}</button>
            <HiOutlineDotsVertical size="25px" style={{marginRight:'10px'}}/>
+           </div>
           </div>
           <div className="insta-content">
             {(post_image && <img src={post_image} className='upload-pic'/>) || <img src={Demo} className='upload-pic'/>}            
@@ -289,7 +415,10 @@ const Instagram = () => {
           <div style={{padding:'10px'}}>
           <Row>
             <Col md="8">
-            <FaRegHeart size="25px" style={{marginRight:'15px'}}/>
+            {toggle_reaction=='not liked'?
+            <FaRegHeart size="25px" style={{marginRight:'15px'}}/>:
+            <FaHeart size="25px" color='red' style={{marginRight:'15px'}}/>
+            }
             <FaRegComment size="25px" style={{marginRight:'15px'}}/>
             <FiSend size="25px" />
             </Col>
@@ -299,16 +428,16 @@ const Instagram = () => {
           </Row>
           </div>
           <div style={{padding:'0px 15px'}}>
-            <div>{0} likes</div>
+            <div>{likes || 0} likes</div>
           </div>
-          <div style={{padding:'5px 15px',display:'flex'}}>
+          <div style={{padding:'5px 15px'}}>
             <div>
                 <span className="twitter-name">{name || 'Name'}</span>
-                <span className="clamp-text">This is simple text . Add #hastag and your desired text</span>
+                <span className="caption-text">{caption || 'This is auto generated caption . Add  your desired caption'} {more == 'show' && <span style={{color:'gray'}}>...more</span>}</span>
             </div>
           </div>
           <div style={{padding:'0px 15px',color:'gray'}}>
-            <div>View all {0} comments</div>
+            <div>View all {comment || 0} comments</div>
           </div>
           <div style={{padding:'10px 0px 0px 15px'}}>
             <div>
@@ -320,7 +449,7 @@ const Instagram = () => {
             <div>{post_date || 'a day ago'}</div>
           </div>
           </div>
-          <Button onClick={getImage} color='primary'>Download</Button>
+          <Button onClick={getImage} color='danger'>Download</Button>
         </Col>
       </Row>
     </Container>
