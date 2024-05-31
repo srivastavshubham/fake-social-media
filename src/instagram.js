@@ -6,19 +6,25 @@ import { FaRegComment } from "react-icons/fa6";
 import { FaRetweet } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
+import { FiSend } from "react-icons/fi";
+import { FaRegBookmark } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+
 
 import Avatar from './images.png'
+import Demo from './logo.webp'
 
-const FormPreviewBox = () => {
+const Instagram = () => {
     
     const divRef = useRef(null);
 
     const [name, setName] = useState();
-    const [username, setUsername] = useState();
-    const [tweet, setTweet] = useState();
+    const [location, setLocation] = useState();
+    const [post, setPost] = useState();
     const [avatar, setAvatar] = useState();
-    const [hour, setHour] = useState(12);
-    const [minute, setMinute] = useState(10);
+    const [post_image, setPostImage] = useState();
+    const [post_date, setPostDate] = useState();
     const [time_format, setTimeFormat] = useState('PM');
     const [date, setDate] = useState();
     const [view, setView] = useState();
@@ -57,6 +63,18 @@ const FormPreviewBox = () => {
           reader.readAsDataURL(file);
         }
       }
+      
+      const handlePostImage=(e)=>{
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPostImage(reader.result);
+        };
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+      
 
       const handleDate = (e) => {
         const selectedDate = e.target.value;
@@ -87,7 +105,7 @@ const FormPreviewBox = () => {
   return (
     <Container style={{ border: '2px solid #ccc', borderRadius: '10px', padding: '20px' ,marginTop:'50px',color:'#5e5ee7',marginBottom:'5%'}}>
       <Row>
-        <Col md="7" style={{ borderRight: '1px solid #ccc' }}>
+        <Col md="8" style={{ borderRight: '1px solid #ccc' }}>
           <h2>Customize Your Tweet</h2>
           <Form>
           <Row>
@@ -102,56 +120,45 @@ const FormPreviewBox = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="username">Username</Label>
+              <Label for="location">Location</Label>
               <Input
                 type="text"
-                name="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                name="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="tweet">Tweet</Label>
+              <Label for="tweet">Post text</Label>
               <Input
                 type="textarea"
                 name="tweet"
-                value={tweet}
-                onChange={(e) => setTweet(e.target.value)}
+                value={post}
+                onChange={(e) => setPost(e.target.value)}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="tweet">Avatar</Label>
+              <Label for="tweet">Profile Image</Label>
               <Input
                 type="file"
                 onChange={handleAvatar}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="tweet">Time</Label>
-              <div  style={{display:'flex'}}>
+              <Label for="tweet">Post Image</Label>
               <Input
-                type="number"
-                name="hour"
-                placeholder="hour"
-                min="1" max="12"
-                value={hour}
-                onChange={(e) => setHour(e.target.value)}
-                style={{marginRight:'20px'}}
+                type="file"
+                onChange={handlePostImage}
               />
-               <Input
-                type="number"
-                name="minute"
-                placeholder="minute"
-                min="0" max="59"
-                value={minute}
-                onChange={(e) => setMinute(e.target.value)}
-                style={{marginRight:'20px'}}
+            </FormGroup>
+            <FormGroup>
+              <Label for="location">Post Date</Label>
+              <Input
+                type="text"
+                name="post_date"
+                value={post_date}
+                onChange={(e) => setPostDate(e.target.value)}
               />
-               <select name="period" value={time_format}  onChange={(e) => setTimeFormat(e.target.value)}>
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
-                </select> 
-              </div>
             </FormGroup>
             </Col>
 
@@ -260,57 +267,57 @@ const FormPreviewBox = () => {
             </Row>
           </Form>
         </Col>
-        <Col md="5">
+        <Col md="4">
           <h2 className='text-center'>Preview</h2>
-          <div className="preview-container" ref={divRef} style={{backgroundColor:theme=='light'?'white':'black',color:theme=='light'?'black':'white'}}>
-          <div className='preview-top-container'>
-            {(avatar && <img src={avatar} className='avatar-pic' />) || <img src={Avatar} className='avatar-pic' />}
-            <div>
-            <div className='twitter-name-icon'>
+          <div className="instagram-container" ref={divRef} style={{backgroundColor:theme=='light'?'white':'black',color:theme=='light'?'black':'white'}}>
+          <div className='insta-top-container'>
+           <div style={{display:'flex'}}>
+           {(avatar && <img src={avatar} className='avatar-pic' style={{border:'2px solid #ee2a7b'}}/>) || <img src={Avatar} className='avatar-pic' style={{border:'2px solid #ee2a7b'}}/>}
+           <div>
+           <div className='twitter-name-icon'>
               <div className="twitter-name">{name || 'Name'}</div>
                 {isVerified == 'Yes' && <MdVerified width="19" height="19" color='blue'/>}
             </div>
-            <div className='twitter-username'>@{username || 'username'}</div>
+            <div className='insta-username'>{location || 'location'}</div>
+           </div>
+           </div>
+           <HiOutlineDotsVertical size="25px" style={{marginRight:'10px'}}/>
+          </div>
+          <div className="insta-content">
+            {(post_image && <img src={post_image} className='upload-pic'/>) || <img src={Demo} className='upload-pic'/>}            
+          </div>
+          <div style={{padding:'10px'}}>
+          <Row>
+            <Col md="8">
+            <FaRegHeart size="25px" style={{marginRight:'15px'}}/>
+            <FaRegComment size="25px" style={{marginRight:'15px'}}/>
+            <FiSend size="25px" />
+            </Col>
+            <Col md="4">
+            <FaRegBookmark size="25px" style={{float:'right'}}/>
+            </Col>
+          </Row>
+          </div>
+          <div style={{padding:'0px 15px'}}>
+            <div>{0} likes</div>
+          </div>
+          <div style={{padding:'5px 15px',display:'flex'}}>
+            <div>
+                <span className="twitter-name">{name || 'Name'}</span>
+                <span className="clamp-text">This is simple text . Add #hastag and your desired text</span>
             </div>
           </div>
-          <div className="preview-content">
-            <p>
-              { tweet && tweetFormat(tweet) || 'Create you own tweet,tweet now'}
-            </p>
+          <div style={{padding:'0px 15px',color:'gray'}}>
+            <div>View all {0} comments</div>
           </div>
-          <div className="preview-dates">
-            <span>{`${hour}:${minute} ${time_format}`}</span>
-            <span>·</span>
-            <span>{date || 'September 07, 1996'}</span>
-            <span>·</span>
-            <span>
-              <b>{view || 0}</b> Views
-            </span>
+          <div style={{padding:'10px 0px 0px 15px'}}>
+            <div>
+            {(avatar && <img src={avatar} className='avatar-pic-below'/>) || <img src={Avatar} className='avatar-pic-below'/>}
+            <span style={{color:'gray'}}>Add a comment...</span>
+            </div>
           </div>
-          <div className="preview-stats">
-            <span>
-              <b>{retweet || 0}</b> Retweets
-            </span>
-            <span>
-              <b>{quotes || 0}</b> Quotes
-            </span>
-            <span>
-              <b>{likes || 0}</b> Likes
-            </span>
-          </div>
-          <div className="preview-actions">
-            <span>
-              {<FaRegComment color="#6e767e" width="20px" height="20px" />}
-            </span>
-            <span>
-              {<FaRetweet color="#6e767e" width="20px" height="20px" />}
-            </span>
-            <span>
-              {<CiHeart color="#6e767e" width="20px" height="20px" />}
-            </span>
-            <span>
-              {<FiShare color="#6e767e" width="20px" height="20px" />}
-            </span>
+          <div style={{padding:'0px 15px',color:'gray'}}>
+            <div>{post_date || 'a day ago'}</div>
           </div>
           </div>
           <Button onClick={getImage} color='primary'>Download</Button>
@@ -320,4 +327,4 @@ const FormPreviewBox = () => {
   );
 };
 
-export default FormPreviewBox;
+export default Instagram;
