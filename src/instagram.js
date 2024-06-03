@@ -8,8 +8,8 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import Avatar from './images.png'
-import Demo from './logo.webp'
+import Avatar from './assets/images.png'
+import Demo from './assets/logo.webp'
 
 const Instagram = () => {
     
@@ -99,7 +99,7 @@ const Instagram = () => {
     <Container style={{ border: '2px solid #ccc', borderRadius: '10px', padding: '20px' ,marginTop:'50px',color:'#ee2a7b',marginBottom:'5%'}}>
       <Row>
         <Col md="8" style={{ borderRight: '1px solid #ccc' }}>
-          <h2>Customize Your Tweet</h2>
+          <h2>Customize Your Instagram Post</h2>
           <Form>
           <Row>
             <Col md="6" style={{ borderRight: '1px solid #ccc' }}>

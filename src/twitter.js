@@ -6,8 +6,7 @@ import { FaRegComment } from "react-icons/fa6";
 import { FaRetweet } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { FiShare } from "react-icons/fi";
-
-import Avatar from './images.png'
+import Avatar from './assets/images.png'
 
 const FormPreviewBox = () => {
     

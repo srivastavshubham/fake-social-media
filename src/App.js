@@ -3,6 +3,7 @@ import Twitter from "./twitter";
 import Insta from "./instagram";
 import Navbar from "./navbar";
 import Home from './home'
+import Facebook from "./facebook";
 
 
 const Error = () => {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/twitter" element={<Twitter />} />
           <Route path="/insta" element={<Insta />} />
+          <Route path="/fb" element={<Facebook />} />
           <Route exact path="/*" element={<Error />} />
        </Routes>
        </BrowserRouter>
