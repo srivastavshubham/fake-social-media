@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Whatsapp() {
   return (
-    <div>Whatsapp</div>
+    <div className='text-center fs-3'>This page is under maintainance</div>
   )
 }

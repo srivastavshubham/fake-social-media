@@ -6,6 +6,7 @@ import Home from './home'
 import Facebook from "./facebook";
 import Whatsapp from "./whatsapp";
 import Instagramdm from "./instagramdm";
+import Linkedin from "./linkedin";
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/fb" element={<Facebook />} />
           <Route path="/instadm" element={<Instagramdm />} />
           <Route path="/whatsapp" element={<Whatsapp />} />
+          <Route path="/linkedin" element={<Linkedin />} />
           <Route exact path="/*" element={<Error />} />
        </Routes>
        </BrowserRouter>
