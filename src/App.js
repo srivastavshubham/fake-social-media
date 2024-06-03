@@ -4,6 +4,9 @@ import Insta from "./instagram";
 import Navbar from "./navbar";
 import Home from './home'
 import Facebook from "./facebook";
+import Whatsapp from "./whatsapp";
+import Instagramdm from "./instagramdm";
+
 
 
 const Error = () => {
@@ -29,6 +32,8 @@ function App() {
           <Route path="/twitter" element={<Twitter />} />
           <Route path="/insta" element={<Insta />} />
           <Route path="/fb" element={<Facebook />} />
+          <Route path="/instadm" element={<Instagramdm />} />
+          <Route path="/whatsapp" element={<Whatsapp />} />
           <Route exact path="/*" element={<Error />} />
        </Routes>
        </BrowserRouter>
