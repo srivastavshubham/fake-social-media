@@ -1,0 +1,115 @@
+.whatsapp-main-container{
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    /* width: 98vw; */
+    background-color: #ece5dd;
+}
+.chat-header{
+    background-color: #075e54;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chat-header-left{
+    display: flex;
+    align-items: center;
+}
+.chat-header-right{
+    display: flex;
+    align-items: center;
+}
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.chat-body{
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.message-container{
+    display: flex;
+    margin-bottom: 10px;
+}
+.message-bubble{
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 60%;
+}
+.message-text{
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: black;
+    float: left;
+}
+.message-time{
+    font-size: 10px;
+    color: gray;
+    align-self: flex-end;
+    padding-left: 10px;
+}
+.whatsapp-comment-input-section {
+  display: flex;
+  align-items: center;
+}
+.whatsapp-comment-input {
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+  border-right: none;
+  border-left: none;
+  background-color: rgb(242 243 245);
+}
+.whatsapp-comment-icons {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 9px;
+  border-left: none;
+  background-color: rgb(242 243 245);
+}
+.whatsapp-comment-icons-left {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 9px;
+    border-right: none;
+    background-color: rgb(242 243 245);
+  }
+  .message-date {
+    background-color: #bcbdca78;
+    color: black;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 5px;
+    padding: 0px 10px;
+    max-width: 90%; 
+    margin-bottom: 10px;
+  }
+  
+  .message-date-container{
+    display: flex;
+    justify-content: center;
+  }
+  .recepient-name{
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  }

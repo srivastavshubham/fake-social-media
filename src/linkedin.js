@@ -12,9 +12,6 @@ import wow from './assets/facebook-wao.png'
 import { LuThumbsUp } from "react-icons/lu";
 import { FaThumbsUp } from "react-icons/fa6";
 import { VscComment } from "react-icons/vsc";
-import { PiShareFat } from "react-icons/pi";
-import { CiCamera } from "react-icons/ci";
-import { HiOutlineGif } from "react-icons/hi2";
 import { GrEmoji } from "react-icons/gr";
 import { MdPublic } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
@@ -23,7 +20,6 @@ import { IoIosSend } from "react-icons/io";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { BsCardImage } from "react-icons/bs";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 
 
