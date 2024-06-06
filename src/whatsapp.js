@@ -13,8 +13,6 @@ import { CiCamera } from "react-icons/ci";
 import { IoMicCircle } from "react-icons/io5";
 import Demo from './assets/bg-whatsapp.png'
 
-
-
 export default function Whatsapp() {
   const divRef = useRef(null);
   const [messages, setMessages] = useState([
@@ -156,7 +154,7 @@ export default function Whatsapp() {
                     onChange={handlePostImage}
                   />
                 </FormGroup>
-                <Label className='recepient-name'>Sender Message</Label>
+                <Label className='whatsapp-recepient-name'>Sender Message</Label>
                 <span style={{color:"red",display:'flex',justifyContent:'center'}}>{sender_error_toggle && sender_error_message}</span>
                 <FormGroup>
                   <Label for="tweet">Message</Label>
@@ -234,7 +232,7 @@ export default function Whatsapp() {
                     </FormGroup>
                   </div>
                 </FormGroup>
-                <Label className='recepient-name' style={{paddingTop:'10px'}}>Receiver Message</Label>
+                <Label className='whatsapp-recepient-name' style={{paddingTop:'10px'}}>Receiver Message</Label>
                 <span style={{color:"red",display:'flex',justifyContent:'center'}}>{receiver_error_toggle && receiver_error_message}</span>
                 <FormGroup>
                   <Label for="tweet">Message</Label>
@@ -268,40 +266,40 @@ export default function Whatsapp() {
           </Form>
         </Col>
         <Col md="5">
-          <h2 className='text-center'>Preview</h2>
+          <h2 className='whatsapp-text-center'>Preview</h2>
           <div className='whatsapp-main-container'  ref={divRef} >
-            <div className='chat-header'>
-              <div className='chat-header-left'>
+            <div className='whatsapp-chat-header'>
+              <div className='whatsapp-chat-header-left'>
                 <GoArrowLeft size='25px' />&nbsp;
-                {(avatar && <img src={avatar} className='avatar' />) || <img src={Avatar} className='avatar' />}
+                {(avatar && <img src={avatar} className='whatsapp-avatar' />) || <img src={Avatar} className='whatsapp-avatar' />}
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 'bold' }}>{name || 'Name'}</div>
                   <div style={{ fontSize: '12px' }}>{isOnline == 'online' ? status || 'Online' : ''}</div>
                 </div>
               </div>
-              <div className='chat-header-right'>
+              <div className='whatsapp-chat-header-right'>
                 <FaVideo size="25px" style={{ marginRight: '20px' }} />
                 <IoIosCall size="25px" style={{ marginRight: '20px' }} />
                 <HiDotsVertical size="25px" />
               </div>
             </div>
-            <div className='chat-body' style={{ backgroundImage: post_image ? `url(${post_image})` : `url(${Demo})` }}>
-              <div className='message-date-container'>
-                <div className='message-date'>{msg_break || "TODAY"}</div>
+            <div className='whatsapp-chat-body' style={{ backgroundImage: post_image ? `url(${post_image})` : `url(${Demo})` }}>
+              <div className='whatsapp-message-date-container'>
+                <div className='whatsapp-message-date'>{msg_break || "TODAY"}</div>
               </div>
               {messages.map(message => (
-                <div className='message-container' style={{ justifyContent: message.type == 'sent' && 'flex-end' }}>
-                  <div className='message-bubble' style={{ backgroundColor: message.type == 'sent' ? '#dcf8c6' : 'white' }}>
+                <div className='whatsapp-message-container' style={{ justifyContent: message.type == 'sent' && 'flex-end' }}>
+                  <div className='whatsapp-message-bubble' style={{ backgroundColor: message.type == 'sent' ? '#dcf8c6' : 'white' }}>
                     <div>{message.image && <img src={message.image} alt="uploaded" style={{ maxWidth: '200px', maxHeight: '200px' }} />}</div>
                     <div style={{display:'flex',justifyContent:'space-between'}}>
-                      <div className='message-text'>{message.text}</div>
-                      <div className='message-time'>{message.time}</div>
+                      <div className='whatsapp-message-text'>{message.text}</div>
+                      <div className='whatsapp-message-time'>{message.time}</div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div className='chat-input' style={{ padding: '10px 15px', backgroundImage: `url(${Demo})` }}>
+            <div className='whatsapp-chat-input' style={{ padding: '10px 15px', backgroundImage: `url(${Demo})` }}>
               <div className="whatsapp-comment-input-section">
                 <div className="whatsapp-comment-icons-left">
                   <CgSmileMouthOpen size="23px" style={{ marginRight: '5px', color: 'gray' }} />
