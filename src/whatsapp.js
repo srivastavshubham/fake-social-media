@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import './whatsapp.css'
+import html2canvas from 'html2canvas';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import Avatar from './assets/images.png'
 import { GoArrowLeft } from "react-icons/go";
@@ -15,6 +16,7 @@ import Demo from './assets/bg-whatsapp.png'
 
 
 export default function Whatsapp() {
+  const divRef = useRef(null);
   const [messages, setMessages] = useState([
     { id: 1, text: 'Hi...', time: '11:20 AM', type: 'sent' },
     { id: 2, text: 'Hello', time: '11:21 AM', type: 'received' },
@@ -106,6 +108,21 @@ export default function Whatsapp() {
         setReceiverMessageTime('')
       }
     }
+  }
+
+  const getImage = () =>{
+    if (!divRef.current) return;
+    html2canvas(divRef.current)
+    .then((canvas) => {
+        const screenshot = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = screenshot;
+        link.download = 'screenshot.png';
+        link.click();
+    })
+    .catch((error) => {
+        console.error('Error capturing screenshot:', error);
+    });
   }
 
   return (
@@ -252,7 +269,7 @@ export default function Whatsapp() {
         </Col>
         <Col md="5">
           <h2 className='text-center'>Preview</h2>
-          <div className='whatsapp-main-container'>
+          <div className='whatsapp-main-container'  ref={divRef} >
             <div className='chat-header'>
               <div className='chat-header-left'>
                 <GoArrowLeft size='25px' />&nbsp;
@@ -298,6 +315,8 @@ export default function Whatsapp() {
               </div>
             </div>
           </div>
+          <br/>
+          <Button onClick={getImage} color='success'>Download</Button>
         </Col>
       </Row>
     </Container>
