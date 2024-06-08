@@ -12,6 +12,7 @@ import { IoAttachSharp } from "react-icons/io5";
 import { CiCamera } from "react-icons/ci";
 import { IoMicCircle } from "react-icons/io5";
 import Demo from './assets/bg-whatsapp.png'
+import { BiCheckDouble } from "react-icons/bi";
 
 export default function Whatsapp() {
   const divRef = useRef(null);
@@ -293,7 +294,7 @@ export default function Whatsapp() {
                     <div>{message.image && <img src={message.image} alt="uploaded" style={{ maxWidth: '200px', maxHeight: '200px' }} />}</div>
                     <div style={{display:'flex',justifyContent:'space-between'}}>
                       <div className='whatsapp-message-text'>{message.text}</div>
-                      <div className='whatsapp-message-time'>{message.time}</div>
+                      <div className='whatsapp-message-time'>{message.time} {message.type=='sent' && <BiCheckDouble size="18px" style={{color:'blue'}}/>}</div>
                     </div>
                   </div>
                 </div>
