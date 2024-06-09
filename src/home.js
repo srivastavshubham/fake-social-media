@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link} from "react-router-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import TwitterImage from './assets/twiter-logo.png'
@@ -12,9 +12,21 @@ import Linkedin from './assets/linkedin.webp'
 
 export default function Home() {
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    const modalDismissed = localStorage.getItem('modalDismissed');
+    if (!modalDismissed) {
+      setModal(true);
+    }
+  }, []);
 
   const toggle = () => setModal(!modal);
+
+  const handleOkClick = () => {
+    localStorage.setItem('modalDismissed', 'true');
+    setModal(false);
+  };
 
   return (
     <div>
@@ -50,13 +62,13 @@ export default function Home() {
             <span style={{fontSize:'16px',textAlign:'center',color: ' #0077b5',paddingLeft:'5px'}}>Fake LinkedIn Post</span>
         </Link>
     </div>
-    <Modal isOpen={modal} toggle={toggle} centered>
+    <Modal isOpen={modal} toggle={toggle} centered backdrop="static">
         <ModalBody>
           This tool is intended for entertainment purposes only. Creating fake posts or messages for malicious intent, harassment, or spreading misinformation is strictly prohibited. Users are responsible for their own content <br/>
           <strong>I here by agree that I will use this tool for learning purpose only</strong>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={toggle}>
+          <Button color="success" onClick={handleOkClick}>
             Submit
           </Button>
         </ModalFooter>
